@@ -1,0 +1,107 @@
+
+
+                          ************************** SIMULATION OF QUEUE USING STACK   ********************
+#include<iostream>
+#define capacity 5
+using namespace std;
+class Stack{
+	public:
+		int top;
+	  int a[capacity];
+		Stack(){
+			top=-1;
+		}
+		void push(int v)
+		{
+			if(isfull())
+			return;
+			else
+			top++;
+			a[top]=v;
+			return;
+			
+		}
+	    int pop(){
+	    	int v;
+	    	if(isempty())
+	    	return false;
+	    	else
+	    	v=a[top];
+	    	top--;
+	    	return v;
+	    }
+	    bool isempty(){
+	    	if(top<0)
+	    	return true;
+	    	else
+	    	return false;
+		}
+		bool isfull(){
+			if(top==capacity-1){
+				return true;}
+				else
+				return false;
+			}
+		};
+class Queue
+{
+	public:
+	Stack s1,s2;
+	bool enqueue(int c){
+		s1.push(c);
+		return true;
+	}
+	int dequeue(){
+		while(!s1.isempty()){
+			int c=s1.pop();
+			s2.push(c);
+		}
+		int p=s2.pop();
+		while(!s2.isempty()){
+			int d=s2.pop();
+			s1.push(d);
+		}
+		return p;
+	}
+};
+int main(){
+	Queue q;
+	int ch;
+	m:
+	cout<<"Enter ur choice"<<endl;
+	cout<<"1 for inserting"<<endl;
+	cout<<"2 for deleting"<<endl;
+	
+	cin>>ch;
+	switch(ch){
+		case 1:
+			{
+				int t;
+				cin>>t;
+				if(q.enqueue(t))
+				cout<<"Element inserted"<<endl;
+				else
+				cout<<"Element not inserted"<<endl;
+				cout<<"Press y or Y key to continue"<<endl;
+				char o;
+				cin>>o;
+				if(o=='y'||o=='Y')
+				goto m;
+			}
+			case 2:
+			{
+			cout<<"The deleted element is"<<q.dequeue()<<endl;
+			cout<<"Press y or Y key to continue"<<endl;
+				char o;
+				cin>>o;
+				if(o=='y'||o=='Y')
+				goto m;
+			}
+			default:
+				{
+					cout<<"Invsaid choice"<<endl;
+					goto m;
+				}
+}
+	return 0;
+}
